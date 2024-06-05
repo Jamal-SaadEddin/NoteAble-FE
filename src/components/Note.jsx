@@ -2,7 +2,9 @@ import {
   Button,
   Card,
   CardBody,
+  HStack,
   Heading,
+  Icon,
   Input,
   Modal,
   ModalBody,
@@ -19,21 +21,38 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { BsTrash3 } from "react-icons/bs";
 import formatDate from "./../services/FormatDate";
 
 const Note = ({ note }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenEdit,
+    onOpen: onOpenEdit,
+    onClose: onCloseEdit,
+  } = useDisclosure();
   const [currentNote, setCurrentNote] = useState(note);
+  const [showDelete, setShowDelete] = useState(false);
+  const {
+    isOpen: isOpenDelete,
+    onOpen: onOpenDelete,
+    onClose: onCloseDelete,
+  } = useDisclosure();
 
   const handleClose = () => {
     setCurrentNote(note);
-    onClose();
+    onCloseEdit();
   };
 
   const handleSave = () => {
     // Save Note to database...
 
-    onClose();
+    onCloseEdit();
+  };
+
+  const handleDelete = () => {
+    // Delete Note from database...
+
+    onCloseDelete();
   };
 
   return (
@@ -51,18 +70,37 @@ const Note = ({ note }) => {
           minWidth="300px"
           maxWidth="443px"
           cursor="pointer"
-          onClick={onOpen}
+          onClick={onOpenEdit}
+          onMouseEnter={() => setShowDelete(true)}
+          onMouseLeave={() => setShowDelete(false)}
         >
           <CardBody>
             <VStack alignItems="start" spacing={7}>
               <Heading size="md">{currentNote.title}</Heading>
               <Text fontSize="sm">{currentNote.content}</Text>
-              <Tag>{currentNote.createdAt}</Tag>
+              <HStack justifyContent="space-between" w="100%">
+                <Tag>{currentNote.createdAt}</Tag>
+                <Button
+                  visibility={showDelete ? "visible" : "hidden"}
+                  borderRadius={50}
+                  p={0}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onOpenDelete();
+                  }}
+                >
+                  <Icon as={BsTrash3} fontSize={20} />
+                </Button>
+              </HStack>
             </VStack>
           </CardBody>
         </Card>
       </Tooltip>
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        blockScrollOnMount={false}
+        isOpen={isOpenEdit}
+        onClose={onCloseEdit}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
@@ -105,7 +143,6 @@ const Note = ({ note }) => {
           </ModalBody>
           <ModalFooter>
             <Button
-              colorScheme="red"
               variant="ghost"
               mr={3}
               h="fit-content"
@@ -122,6 +159,38 @@ const Note = ({ note }) => {
               onClick={handleSave}
             >
               Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal
+        blockScrollOnMount={false}
+        isOpen={isOpenDelete}
+        onClose={onCloseDelete}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Note Deletion</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>Are you certain you wish to delete this Note?</ModalBody>
+          <ModalFooter>
+            <Button
+              variant="ghost"
+              mr={3}
+              h="fit-content"
+              p={2}
+              onClick={onCloseDelete}
+            >
+              Close
+            </Button>
+            <Button
+              colorScheme="red"
+              variant="ghost"
+              h="fit-content"
+              p={2}
+              onClick={handleDelete}
+            >
+              Delete
             </Button>
           </ModalFooter>
         </ModalContent>
