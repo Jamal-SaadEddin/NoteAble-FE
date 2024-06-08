@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import Notes from "../components/Notes";
 import Header from "../components/Header";
+import Notes from "../components/Notes";
 
 const HomePage = () => {
   return (
-    <Box p={5} display="flex" gap={7} flexDir="column">
+    <Box px={5} pb={5} display="flex" gap={7} flexDir="column">
       <Header />
       <Notes />
     </Box>

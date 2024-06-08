@@ -20,11 +20,18 @@ import {
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
 import formatDate from "./../services/FormatDate";
 
 const Note = ({ note }) => {
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  useEffect(() => {
+    if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+      setIsTouchDevice(true);
+    }
+  }, []);
+
   const {
     isOpen: isOpenEdit,
     onOpen: onOpenEdit,
@@ -81,7 +88,9 @@ const Note = ({ note }) => {
               <HStack justifyContent="space-between" w="100%">
                 <Tag>{currentNote.createdAt}</Tag>
                 <Button
-                  visibility={showDelete ? "visible" : "hidden"}
+                  visibility={
+                    isTouchDevice || showDelete ? "visible" : "hidden"
+                  }
                   borderRadius={50}
                   p={0}
                   onClick={(e) => {

@@ -7,11 +7,13 @@ import {
   InputGroup,
   InputLeftElement,
   VStack,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 const Header = () => {
+  const bgColor = useColorModeValue("gray.50", "gray.800");
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNote, setNewNote] = useState({
     title: "",
@@ -31,17 +33,37 @@ const Header = () => {
   };
 
   return (
-    <VStack gap={7}>
-      <HStack gap={5} w="100%">
+    <VStack
+      gap={7}
+      position="sticky"
+      py={5}
+      top={0}
+      zIndex={100}
+      w="100%"
+      bg={bgColor}
+      boxShadow="xl"
+    >
+      <HStack gap={5} w="100%" wrap="wrap">
         <Heading>NoteAble</Heading>
-        <InputGroup w="50%">
+        <InputGroup
+          w={{
+            base: "100%",
+            md: "50%",
+          }}
+        >
           <InputLeftElement pointerEvents="none">
             <Icon as={AiOutlineSearch} />
           </InputLeftElement>
           <Input type="text" placeholder="Search" />
         </InputGroup>
       </HStack>
-      <HStack w="30%">
+      <HStack
+        w={{
+          base: "100%",
+          md: "50%",
+          xl: "35%",
+        }}
+      >
         <VStack
           w="100%"
           p={1}
