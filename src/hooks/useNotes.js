@@ -37,3 +37,16 @@ export const updateNote = async (noteId, body) => {
     return null;
   }
 };
+
+export const deleteNote = async (noteId) => {
+  try {
+    const response = await axios.delete(
+      `http://localhost:3000/notes/${noteId}`
+    );
+    const message = response.data;
+    return message === "Note deleted";
+  } catch (error) {
+    console.error("Error deleting note: ");
+    return false;
+  }
+};

@@ -19,7 +19,11 @@ const HomePage = () => {
   return (
     <Box px={5} pb={5} display="flex" gap={7} flexDir="column">
       <Header notes={notes} setNotes={setNotes} />
-      {notes ? <Notes notes={notes} /> : <p>Loading notes...</p>}
+      {notes ? (
+        <Notes notes={notes} setNotes={setNotes} />
+      ) : (
+        <p>Loading notes...</p>
+      )}
     </Box>
   );
 };

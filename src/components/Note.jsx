@@ -22,10 +22,10 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
-import { updateNote } from "../hooks/useNotes";
+import { deleteNote, updateNote } from "../hooks/useNotes";
 import formatDate from "./../services/FormatDate";
 
-const Note = ({ note }) => {
+const Note = ({ note, notes, setNotes }) => {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   useEffect(() => {
     if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
@@ -61,8 +61,12 @@ const Note = ({ note }) => {
     onCloseEdit();
   };
 
-  const handleDelete = () => {
-    // Delete Note from database...
+  const handleDelete = async () => {
+    const wasDeleted = await deleteNote(currentNote._id);
+    if (wasDeleted) {
+      const filteredNotes = notes.filter((n) => n._id !== currentNote._id);
+      setNotes(filteredNotes);
+    }
 
     onCloseDelete();
   };
