@@ -1,13 +1,12 @@
 import { HStack } from "@chakra-ui/react";
 import React from "react";
-import { notes } from "../constants/notes";
 import Note from "./Note";
 
-const Notes = () => {
+const Notes = ({ notes }) => {
   return (
     <HStack w="100%" flexWrap="wrap" justifyContent="flex-start" spacing={4}>
-      {notes.map((note, index) => (
-        <Note note={note} key={index} />
+      {notes.map((note) => (
+        <Note note={note} key={note._id} />
       ))}
     </HStack>
   );

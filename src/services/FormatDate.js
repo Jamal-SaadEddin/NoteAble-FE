@@ -1,9 +1,9 @@
-export default function formatDate(dateString) {
-  const parts = dateString.split("/");
-  const day = parts[0].padStart(2, "0"); // Pads the day with a zero if it is only one digit
-  const month = parts[1].padStart(2, "0"); // Pads the month with a zero if it is only one digit
-  const year = parts[2];
+export default function formatDate(dateString, dateType) {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, "0"); // Pad with zero if necessary
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Month is 0-indexed, add 1
+  const year = date.getFullYear();
 
-  // Format the date as 'yyyy-mm-dd'
-  return `${year}-${month}-${day}`;
+  if (dateType === "/") return `${day}/${month}/${year}`;
+  if (dateType === "-") return `${year}-${month}-${day}`;
 }

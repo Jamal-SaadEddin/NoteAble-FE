@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardBody,
@@ -14,7 +15,6 @@ import {
   ModalHeader,
   ModalOverlay,
   Tag,
-  Text,
   Textarea,
   Tooltip,
   VStack,
@@ -84,9 +84,18 @@ const Note = ({ note }) => {
           <CardBody>
             <VStack alignItems="start" spacing={7}>
               <Heading size="md">{currentNote.title}</Heading>
-              <Text fontSize="sm">{currentNote.content}</Text>
+              <Box
+                fontSize="sm"
+                whiteSpace="pre-wrap"
+                fontFamily="monospace"
+                lineHeight="normal"
+                overflow="auto"
+                maxH="100px"
+              >
+                {currentNote.content}
+              </Box>
               <HStack justifyContent="space-between" w="100%">
-                <Tag>{currentNote.createdAt}</Tag>
+                <Tag>{formatDate(currentNote.createdAt, "/")}</Tag>
                 <Button
                   visibility={
                     isTouchDevice || showDelete ? "visible" : "hidden"
@@ -138,7 +147,7 @@ const Note = ({ note }) => {
             />
             <Input
               type="date"
-              value={formatDate(currentNote.createdAt)}
+              value={formatDate(currentNote.createdAt, "-")}
               onInput={(event) =>
                 setCurrentNote({
                   ...currentNote,
