@@ -2,15 +2,15 @@ import { Box } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Notes from "../components/Notes";
-import { getAllNotes } from "../hooks/useNotes";
+import { fakeNotes } from "../constants/fakeNotes";
 
 const HomePage = () => {
-  const [notes, setNotes] = useState(null);
+  const [notes, setNotes] = useState([]);
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const fetchedNotes = await getAllNotes();
-      setNotes(fetchedNotes);
+      // const fetchedNotes = await getAllNotes();
+      setNotes(fakeNotes);
     };
 
     fetchNotes();

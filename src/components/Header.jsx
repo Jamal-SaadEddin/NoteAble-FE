@@ -11,14 +11,16 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { addNewNote, searchNotes } from "../hooks/useNotes";
+import { fakeNotes } from "../constants/fakeNotes";
 
 const Header = ({ notes, setNotes }) => {
   const bgColor = useColorModeValue("gray.50", "gray.800");
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNote, setNewNote] = useState({
+    _id: Math.floor(Math.random() * 1000000),
     title: "",
     content: "",
+    createdAt: Date.now(),
   });
 
   const handleClose = () => {
@@ -27,15 +29,20 @@ const Header = ({ notes, setNotes }) => {
   };
 
   const handleAdd = async () => {
-    const fetchedNewNote = await addNewNote(newNote);
-    const newNotes = [...notes, fetchedNewNote];
+    // const fetchedNewNote = await addNewNote(newNote);
+    const newNotes = [...notes, newNote];
     setNotes(newNotes);
 
     handleClose();
   };
 
   const handleSearch = async (searchQuery) => {
-    const filteredNotes = await searchNotes(searchQuery);
+    // const filteredNotes = await searchNotes(searchQuery);
+    const filteredNotes = fakeNotes.filter(
+      (note) =>
+        note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        note.content.toLowerCase().includes(searchQuery.toLowerCase())
+    );
     setNotes(filteredNotes);
   };
 
