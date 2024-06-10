@@ -6,14 +6,18 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Textarea,
   VStack,
+  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { MdNightlight, MdOutlineLightMode } from "react-icons/md";
 import { fakeNotes } from "../constants/fakeNotes";
 
 const Header = ({ notes, setNotes }) => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const bgColor = useColorModeValue("gray.50", "gray.800");
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNote, setNewNote] = useState({
@@ -50,7 +54,7 @@ const Header = ({ notes, setNotes }) => {
     <VStack
       gap={7}
       position="sticky"
-      py={5}
+      p={5}
       top={0}
       zIndex={100}
       w="100%"
@@ -74,6 +78,15 @@ const Header = ({ notes, setNotes }) => {
             onInput={(e) => handleSearch(e.target.value)}
           />
         </InputGroup>
+        <Icon
+          as={colorMode === "light" ? MdNightlight : MdOutlineLightMode}
+          fontSize={28}
+          cursor="pointer"
+          onClick={toggleColorMode}
+          position="absolute"
+          right={5}
+          top={5}
+        />
       </HStack>
       <HStack
         w={{
@@ -99,12 +112,14 @@ const Header = ({ notes, setNotes }) => {
               setNewNote({ ...newNote, title: event.target.value })
             }
           />
-          <Input
+          <Textarea
             placeholder="Take a note..."
             onFocus={() => setIsExpanded(true)}
             border={isExpanded ? "none" : "1px solid"}
             borderColor="inherit"
             _focus={{ boxShadow: "none" }}
+            rows={isExpanded ? 4 : 1}
+            resize="none"
             value={newNote.content}
             onInput={(event) =>
               setNewNote({ ...newNote, content: event.target.value })
