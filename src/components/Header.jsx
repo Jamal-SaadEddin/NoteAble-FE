@@ -11,8 +11,9 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { addNewNote } from "../hooks/useNotes";
 
-const Header = () => {
+const Header = ({ notes, setNotes }) => {
   const bgColor = useColorModeValue("gray.50", "gray.800");
   const [isExpanded, setIsExpanded] = useState(false);
   const [newNote, setNewNote] = useState({
@@ -25,9 +26,10 @@ const Header = () => {
     setIsExpanded(false);
   };
 
-  const handleAdd = () => {
-    // Add new note to the DB
-    // ...
+  const handleAdd = async () => {
+    const fetchedNewNote = await addNewNote(newNote);
+    const newNotes = [...notes, fetchedNewNote];
+    setNotes(newNotes);
 
     handleClose();
   };
