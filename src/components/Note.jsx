@@ -22,6 +22,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
+import { updateNote } from "../hooks/useNotes";
 import formatDate from "./../services/FormatDate";
 
 const Note = ({ note }) => {
@@ -50,8 +51,12 @@ const Note = ({ note }) => {
     onCloseEdit();
   };
 
-  const handleSave = () => {
-    // Save Note to database...
+  const handleSave = async () => {
+    const updatedNote = await updateNote(currentNote._id, {
+      title: currentNote.title,
+      content: currentNote.content,
+    });
+    setCurrentNote(updatedNote);
 
     onCloseEdit();
   };
@@ -95,7 +100,7 @@ const Note = ({ note }) => {
                 {currentNote.content}
               </Box>
               <HStack justifyContent="space-between" w="100%">
-                <Tag>{formatDate(currentNote.createdAt, "/")}</Tag>
+                <Tag>{formatDate(currentNote.createdAt)}</Tag>
                 <Button
                   visibility={
                     isTouchDevice || showDelete ? "visible" : "hidden"
@@ -145,19 +150,7 @@ const Note = ({ note }) => {
                 setCurrentNote({ ...currentNote, content: event.target.value })
               }
             />
-            <Input
-              type="date"
-              value={formatDate(currentNote.createdAt, "-")}
-              onInput={(event) =>
-                setCurrentNote({
-                  ...currentNote,
-                  createdAt: new Date(event.target.value).toLocaleDateString(
-                    "en-GB"
-                  ),
-                })
-              }
-              mt={3}
-            />
+            <Tag>{formatDate(currentNote.createdAt)}</Tag>
           </ModalBody>
           <ModalFooter>
             <Button
@@ -175,6 +168,10 @@ const Note = ({ note }) => {
               h="fit-content"
               p={2}
               onClick={handleSave}
+              isDisabled={
+                currentNote.title === note.title &&
+                currentNote.content === note.content
+              }
             >
               Save
             </Button>

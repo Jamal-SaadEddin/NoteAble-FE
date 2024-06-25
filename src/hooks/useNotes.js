@@ -23,3 +23,17 @@ export const addNewNote = async (body) => {
     return null;
   }
 };
+
+export const updateNote = async (noteId, body) => {
+  try {
+    const response = await axios.put(
+      `http://localhost:3000/notes/${noteId}`,
+      body
+    );
+    const fetchedNote = response.data;
+    return fetchedNote;
+  } catch (error) {
+    console.error("Error updating note: ");
+    return null;
+  }
+};
