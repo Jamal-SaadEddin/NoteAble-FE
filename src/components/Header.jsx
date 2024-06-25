@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { addNewNote } from "../hooks/useNotes";
+import { addNewNote, searchNotes } from "../hooks/useNotes";
 
 const Header = ({ notes, setNotes }) => {
   const bgColor = useColorModeValue("gray.50", "gray.800");
@@ -32,6 +32,11 @@ const Header = ({ notes, setNotes }) => {
     setNotes(newNotes);
 
     handleClose();
+  };
+
+  const handleSearch = async (searchQuery) => {
+    const filteredNotes = await searchNotes(searchQuery);
+    setNotes(filteredNotes);
   };
 
   return (
@@ -56,7 +61,11 @@ const Header = ({ notes, setNotes }) => {
           <InputLeftElement pointerEvents="none">
             <Icon as={AiOutlineSearch} />
           </InputLeftElement>
-          <Input type="text" placeholder="Search" />
+          <Input
+            type="text"
+            placeholder="Search"
+            onInput={(e) => handleSearch(e.target.value)}
+          />
         </InputGroup>
       </HStack>
       <HStack

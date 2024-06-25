@@ -50,3 +50,16 @@ export const deleteNote = async (noteId) => {
     return false;
   }
 };
+
+export const searchNotes = async (query) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/notes/search?query=${query}`
+    );
+    const fetchedNotes = response.data;
+    return fetchedNotes;
+  } catch (error) {
+    console.error("Error searching notes: ");
+    return [];
+  }
+};
