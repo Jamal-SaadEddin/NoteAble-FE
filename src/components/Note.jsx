@@ -22,7 +22,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
-import formatDate from "./../services/FormatDate";
 
 const Note = ({ note, notes, setNotes }) => {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -108,7 +107,9 @@ const Note = ({ note, notes, setNotes }) => {
                 {currentNote.content}
               </Box>
               <HStack justifyContent="space-between" w="100%">
-                <Tag>{formatDate(currentNote.createdAt)}</Tag>
+                <Tag>
+                  {new Date(currentNote.createdAt).toLocaleDateString("en-GB")}
+                </Tag>
                 <Button
                   visibility={
                     isTouchDevice || showDelete ? "visible" : "hidden"
@@ -158,7 +159,9 @@ const Note = ({ note, notes, setNotes }) => {
                 setCurrentNote({ ...currentNote, content: event.target.value })
               }
             />
-            <Tag>{formatDate(currentNote.createdAt)}</Tag>
+            <Tag>
+              {new Date(currentNote.createdAt).toLocaleDateString("en-GB")}
+            </Tag>
           </ModalBody>
           <ModalFooter>
             <Button
