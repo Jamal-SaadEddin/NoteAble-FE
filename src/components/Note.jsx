@@ -22,7 +22,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
-import { deleteNote, updateNote } from "../hooks/useNotes";
 import formatDate from "./../services/FormatDate";
 
 const Note = ({ note, notes, setNotes }) => {
@@ -52,21 +51,26 @@ const Note = ({ note, notes, setNotes }) => {
   };
 
   const handleSave = async () => {
-    const updatedNote = await updateNote(currentNote._id, {
-      title: currentNote.title,
-      content: currentNote.content,
-    });
-    setCurrentNote(updatedNote);
+    // const updatedNote = await updateNote(currentNote._id, {
+    //   title: currentNote.title,
+    //   content: currentNote.content,
+    // });
+    // setCurrentNote(updatedNote);
+
+    const newNotes = notes.map((n) =>
+      n._id === currentNote._id ? currentNote : n
+    );
+    setNotes(newNotes);
 
     onCloseEdit();
   };
 
   const handleDelete = async () => {
-    const wasDeleted = await deleteNote(currentNote._id);
-    if (wasDeleted) {
-      const filteredNotes = notes.filter((n) => n._id !== currentNote._id);
-      setNotes(filteredNotes);
-    }
+    // const wasDeleted = await deleteNote(currentNote._id);
+    // if (wasDeleted) {
+    const filteredNotes = notes.filter((n) => n._id !== currentNote._id);
+    setNotes(filteredNotes);
+    // }
 
     onCloseDelete();
   };
