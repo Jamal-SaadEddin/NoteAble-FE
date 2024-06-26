@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# NoteAble | Note Keeping Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This Note Keeping Application is a simple yet functional web-based tool designed to manage notes efficiently. Users can create, read, update, and delete notes, as well as search for specific notes based on keywords. The application is built using React.js for the frontend with Chakra UI for user interface.
 
-In the project directory, you can run:
+This project was developed as part of the training program at Foothill Technology Solutions.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Search Functionality:** Find notes easily using the search field.
+- **Note Creation:** Add new notes with content and a creation date.
+- **Note Update:** Modify the content of existing notes.
+- **Note Deletion:** Remove notes with a confirmation dialog.
+- **User-friendly Interface:** Built with Chakra UI for a modern and responsive design.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- **React.js:** A JavaScript library for building user interfaces.
+- **Chakra UI:** A simple, modular, and accessible component library for React.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup and Installation
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js
+- npm or yarn
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/Jamal-SaadEddin/NoteAble-FE.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd NoteAble-FE
+    ```
+3. Install the dependencies:
+    ```bash
+    npm install
+    ```
+    or
+    ```bash
+    yarn install
+    ```
 
-### `npm run eject`
+### Running the Application
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Start the development server:
+    ```bash
+    npm start
+    ```
+    or
+    ```bash
+    yarn start
+    ```
+2. Open your browser and navigate to `http://localhost:3000`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Backend Integration
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This frontend application complements the backend component. For more information on the backend, refer to the [My Note Keeper Backend Repository](https://github.com/Jamal-SaadEddin/NoteAble-BE).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Authors
+- [Jamal SaadEddin](https://github.com/Jamal-SaadEddin)
 
-## Learn More
+## Acknowledgements
+- This task is part of the Foothill Technology Solutions Internship Cycle.
+- Big thanks to my trainer [@Huthaifa](https://github.com/Huthaifa-Dev)
+<img src="https://github.com/Jamal-SaadEddin/TodoTick/assets/104212352/9d3c83b0-5ea8-46ff-93e8-f1504af9dc67" width="400" alt="foothill logo">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thank you for visiting my project! Feel free to star or contribute to the repository if you find it useful.
